@@ -1,24 +1,46 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import Login from "./Login"
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [email, setEmail] = useState("")
+
+  useEffect(() => {
+    // Fetch the user email and token from local storage
+    const user = JSON.parse(localStorage.getItem("user"))
+    if (!user || !user.token) {
+      setLoggedIn(false)
+      return
+    }
+
+    fetch("http://localhost:8081/v1/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + user.token
+      },
+    }).then(r => {
+        if (r.status == 200) {
+            setLoggedIn(true)
+            setEmail(user.email || "")
+            return
+        }
+    })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+            <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
   );
 }
 
