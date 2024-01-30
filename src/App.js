@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login"
+import Main from "./home/Main";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -38,6 +39,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
             <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
+              <Route path="/main" element={<Main />} />
           </Routes>
         </BrowserRouter>
       </div>
