@@ -11,7 +11,8 @@ const Login = (props) => {
 
 
     function loginCall() {
-        fetch("http://localhost:8081/v1/login", {
+        console.log(process.env)
+        fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/v1/login`, {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",

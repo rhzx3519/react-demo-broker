@@ -18,7 +18,7 @@ function App() {
       return
     }
 
-    fetch("http://localhost:8081/v1/verify", {
+    fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/v1/verify`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
