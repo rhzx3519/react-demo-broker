@@ -18,7 +18,7 @@ function App() {
       return
     }
 
-    fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/v1/verify`, {
+    fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/api/v1/verify`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
