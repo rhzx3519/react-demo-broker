@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "./app/userSlice";
+import User from "./entity/User";
 
 const Login = (props) => {
     const [ email, setEmail ] = useState("admin@gmail.com")
@@ -9,10 +12,8 @@ const Login = (props) => {
 
     const navigate = useNavigate()
 
-
     function loginCall() {
-        console.log(process.env)
-        fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/api/v1/login`, {
+        fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/v1/login`, {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
@@ -26,10 +27,10 @@ const Login = (props) => {
                 return r.json()
             })
             .then(r => {
-                localStorage.setItem("user", JSON.stringify({ email, token: r.token }))
-                props.setLoggedIn(true)
-                props.setEmail(email)
-                navigate("/")
+                localStorage.setItem("user", JSON.stringify(r.data))
+                props.setUser(r.data)
+
+                navigate("/main")
             })
     }
 

@@ -1,18 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { logout } from "./app/userSlice";
 
 const Home = (props) => {
-    const { loggedIn, email } = props
+    const { user } = props
     const navigate = useNavigate()
 
     const onButtonClick = () => {
-        if (loggedIn) {
+        if (user) {
             localStorage.removeItem('user')
-            props.setLoggedIn(false)
+            props.setUser(null)
         } else {
             navigate('/login')
         }
     }
+
 
     return <div className="mainContainer">
         <div className={"titleContainer"}>
@@ -26,10 +28,10 @@ const Home = (props) => {
                 className={"inputButton"}
                 type="button"
                 onClick={onButtonClick}
-                value={loggedIn ? "Log out" : "Log in"}/>
-            {loggedIn &&
+                value={user ? "Log out" : "Log in"}/>
+            {user &&
                 <div>
-                    Your email address is {email}
+                    Your email address is {user.email}
                 </div>}
         </div>
     </div>

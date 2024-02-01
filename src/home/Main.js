@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import './Main.css';
+import Header from "./header/Header";
 
 const Main = (props) => {
+    const { user, setUser } = props
 
     return <section>
-        <div id="header" className={"header"}>
-            <h1>Complex flexbox example</h1>
-        </div>
+        <Header user={user} setUser={setUser} />
 
         <div id="body" className={"body"}>
             <article>

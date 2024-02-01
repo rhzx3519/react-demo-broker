@@ -24,8 +24,12 @@ h1 {
     flex: 1 200px;
 }
 
+.body article:nth-of-type(2) {
+    flex: 2 200px;
+}
+
 .body article:nth-of-type(3) {
-    flex: 3 200px;
+    flex: 1 200px;
     display: flex;
     flex-flow: column;
 }
@@ -44,10 +48,3 @@ button {
     font-size: 18px;
     line-height: 1.5;
 }
-
-section {
-    display: flex;
-    flex-flow: column;
-    font-family: sans-serif;
-}
-

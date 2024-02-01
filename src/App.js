@@ -7,27 +7,30 @@ import Login from "./Login"
 import Main from "./home/Main";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [email, setEmail] = useState("")
+    const [user, setUser] = useState(null)
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [email, setEmail] = useState("")
 
   useEffect(() => {
     // Fetch the user email and token from local storage
-    const user = JSON.parse(localStorage.getItem("user"))
-    if (!user || !user.token) {
-      setLoggedIn(false)
+    const localUser = JSON.parse(localStorage.getItem("user"))
+    if (!localUser || !localUser.token) {
+        setLoggedIn(false)
+        setUser(null)
       return
     }
 
-    fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/api/v1/verify`, {
+    fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/v1/verify`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + user.token
+        "Authorization": "Bearer " + localUser.token
       },
     }).then(r => {
         if (r.status == 200) {
             setLoggedIn(true)
-            setEmail(user.email || "")
+            setEmail(localUser.email || "")
+            setUser(localUser)
             return
         }
     })
@@ -37,9 +40,9 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-            <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
-              <Route path="/main" element={<Main />} />
+              <Route path="/" element={<Home user={user} setUser={setUser} />} />
+              <Route path="/login" element={<Login setUser={setUser} />} />
+              <Route path="/main" element={<Main user={user} setUser={setUser} />} />
           </Routes>
         </BrowserRouter>
       </div>

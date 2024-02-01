@@ -1,0 +1,78 @@
+.header {
+    background: royalblue;
+    height: 60px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.App-logo {
+    height: 5vmin;
+    pointer-events: none;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.header > div {
+    flex: 1 200px;
+    /*background-color: burlywood;*/
+    padding: 10px;
+    margin: 50px;
+}
+
+.header:nth-of-type(2) {
+    flex: 2 200px;
+}
+
+.searchInput {
+    max-width: 200px;
+    height: 50px;
+    align-self: center;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#mid {
+    display: flex;
+    color: white;
+    font-size: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+#mid > div {
+    flex: 0 0 auto;
+    /*background-color: brown;*/
+    /*border: 1px solid black;*/
+}
+#mid:last-child {
+    width: 300px;
+}
+
+.right {
+    display: flex;
+    align-content: flex-start;
+}
+
+button {
+    color: white;
+    background-color: royalblue;
+    outline: none;
+}
+
+input[type='text'] {
+    width: 300px;
+}
+
+.searchIcon {
+    width: 15px;
+    height: 15px;
+    margin-left: -15px;
+    padding-bottom: -20px;
+}
