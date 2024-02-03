@@ -13,7 +13,7 @@ const Header = (props) => {
         if (user) {
             localStorage.removeItem('user')
             setUser(null)
-            navigate('/login')
+            navigate('/')
         }
     }
 

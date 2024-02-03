@@ -11,10 +11,9 @@ const Home = (props) => {
             localStorage.removeItem('user')
             props.setUser(null)
         } else {
-            navigate('/login')
+            navigate('/')
         }
     }
-
 
     return <div className="mainContainer">
         <div className={"titleContainer"}>

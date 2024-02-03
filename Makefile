@@ -1,12 +1,11 @@
 SHELL=/bin/bash
 
 .PHONY: build
-#run:
-#    docker run -p 80:80 rhzx3519/react-demo-broker:latest
 
 docker=
+arch=
 build:
-	sh build.sh $(docker)
+	sh build.sh $(docker) $(arch)
 
 push:
 	docker push rhzx3519/react-demo-broker
