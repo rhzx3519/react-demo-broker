@@ -1,9 +1,9 @@
-  name: 'A ci pipleline for auth-server'
+  name: 'Pipleline for Frontend'
   on:
     workflow_dispatch:
-#    push:
-#      branches:
-#        - master
+    push:
+      branches:
+        - master
   jobs:
     build:
       environment: dev
