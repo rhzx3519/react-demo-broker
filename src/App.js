@@ -2,9 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import Home from "./Home";
-import Login from "./Login"
-import Main from "./home/Main";
+import Main from "./Home/Main";
+import Home from "./Home/Home";
 import SignInSide from "./SignInSide";
 
 function App() {
@@ -16,10 +15,9 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-              {/*<Route path="/" element={<Home user={user} setUser={setUser} />} />*/}
-              {/*<Route path="/login" element={<Login setUser={setUser} />} />*/}
-              <Route path="/main" element={<Main user={user} setUser={setUser} />} />
               <Route path="/" element={<SignInSide setUser={setUser}/>} />
+              <Route path="/main" element={<Main user={user} setUser={setUser} />} />
+              <Route path='/home' element={<Home />} />
           </Routes>
         </BrowserRouter>
       </div>
