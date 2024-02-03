@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { logout } from "./app/userSlice";
+import { logout } from "./App/userSlice";
 
 const Home = (props) => {
     const { user } = props

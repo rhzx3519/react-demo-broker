@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './Main.css';
 import Header from "./header/Header";
+import { Verify } from "../API/AuthAPI";
 
 const Main = (props) => {
     const { user, setUser } = props
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        // Fetch the user email and token from local storage
+        const localUser = JSON.parse(localStorage.getItem("user"))
+        if (!localUser || !localUser.token) {
+            setUser(null)
+            navigate('/')
+            return
+        }
+
+        (async function(){
+            const status= await Verify(localUser.token)
+            if (status === 200) {
+                setUser(localUser)
+                return
+            }
+            navigate('/')
+        })()
+
+    }, [])
 
     return <section>
         <Header user={user} setUser={setUser} />

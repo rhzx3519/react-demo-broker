@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { SignIn, Verify } from "./API/AuthAPI";
 
 function Copyright(props) {
     return (
@@ -45,56 +46,33 @@ export default function SignInSide(props) {
             return
         }
 
-        fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/v1/verify`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localUser.token
-            },
-        }).then(r => {
-            if (r.status == 200) {
+        (async function(){
+            const status= await Verify(localUser.token)
+            if (status === 200) {
                 setUser(localUser)
                 navigate('/main')
-                return
             }
-        })
+        })()
+
     }, [])
 
-    function signinCall(data) {
-        const { email, password } = data
-        fetch(`${process.env.REACT_APP_AUTH_SERVER_BASE_URL}/v1/login`, {
-            method: "POST", // or 'PUT'
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({email, password})
-        }).then(r => {
-            if (r.status !== 200) {
-                window.alert(r.status)
-                return
-            }
-            return r.json()
-        })
-            .then(r => {
-                localStorage.setItem("user", JSON.stringify(r.data))
-                setUser(r.data)
-
-                navigate("/main")
-            })
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
 
-        signinCall({
-            email: data.get('email'),
-            password: data.get('password'),
-        })
+        (async function() {
+            const r = await SignIn({
+                email: data.get('email'),
+                password: data.get('password'),
+            });
+            if (r === null) {
+                return
+            }
+            localStorage.setItem("user", JSON.stringify(r.data))
+            setUser(r.data)
+            navigate("/main")
+        })()
 
     };
 

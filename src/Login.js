@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "./app/userSlice";
-import User from "./entity/User";
+import { login } from "./App/userSlice";
+import User from "./Entity/User";
 
 const Login = (props) => {
     const [ email, setEmail ] = useState("admin@gmail.com")
