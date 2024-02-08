@@ -21,7 +21,7 @@ function Copyright(props) {
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
             <Link color="inherit" href="https://mui.com/">
-                http://3.27.86.30/
+                https://ec2-3-27-86-30.ap-southeast-2.compute.amazonaws.com/
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -50,7 +50,7 @@ export default function SignInSide(props) {
             const status= await Verify(localUser.token)
             if (status === 200) {
                 setUser(localUser)
-                navigate('/main')
+                navigate('/')
             }
         })()
 
@@ -71,7 +71,7 @@ export default function SignInSide(props) {
             }
             localStorage.setItem("user", JSON.stringify(r.data))
             setUser(r.data)
-            navigate("/main")
+            navigate("/")
         })()
 
     };

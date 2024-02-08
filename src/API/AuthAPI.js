@@ -26,7 +26,6 @@ export async function Verify(token) {
         },
     }).then(r => {
         if (r.status !== 200) {
-            window.alert(r.status)
             return
         }
         return r.status
