@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "name": "MUI",
+    "redirect": "/main",
+    "tours": [
+      {
+        "id": 1,
+        "name": "Combo box",
+        "link": "https://mui.com/material-ui/react-autocomplete/#combo-box",
+        "intro": "The value must be chosen from a predefined set of allowed values.",
+        "image": "/mui/ComboBox.png",
+        "category": "Autocomplete"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "System Design",
+    "redirect": "/main",
+    "tours": [
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Broker",
+    "redirect": "/main",
+    "tours": [
+      {
+        "id": 1,
+        "name": "XUEQIU",
+        "link": "https://xueqiu.com/",
+        "intro": "Xueqiu is a well-known Chinese social investment platform that provides information and trading services for stocks, funds, bonds, and other financial products. Users can access stock market news, exchange investment insights, view stock information, track investment portfolios, and more on Xueqiu. Additionally, Xueqiu offers social features that allow users to follow other investors, share their investment views, and engage in discussions.",
+        "image": "/broker/xueqiu.png",
+        "category": "Simulate"
+      }
+    ]
+  }
+]

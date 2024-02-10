@@ -14,7 +14,7 @@ const Main = (props) => {
         const localUser = JSON.parse(localStorage.getItem("user"))
         if (!localUser || !localUser.token) {
             setUser(null)
-            navigate('/')
+            // navigate('/')
             return
         }
 
@@ -24,7 +24,7 @@ const Main = (props) => {
                 setUser(localUser)
                 return
             }
-            navigate('/')
+            // navigate('/')
         })()
 
     }, [])

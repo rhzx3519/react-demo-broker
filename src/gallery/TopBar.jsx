@@ -14,7 +14,7 @@ import { AccountCircle } from "@mui/icons-material";
 
 const tabData = [
     {   key: 0,
-        title: 'MUI',
+        title: 'mui',
     },
     {
         key: 1,
