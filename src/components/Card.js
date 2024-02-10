@@ -1,5 +1,6 @@
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import CategoryIcon from '@mui/icons-material/Category';
+import LinkIcon from '@mui/icons-material/Link';
 import {
   createTheme,
   Grid,
@@ -83,8 +84,11 @@ export default function Card({ tour }) {
               }}
               marginTop={0}
             >
+              <LinkIcon style={{ width: 12.5 }} sx={{ mt: 0 }} />
               <Link href={tour.link} underline="hover">
-                {'Link'}
+                <Typography variant="body2" component="p" marginLeft={0.5}>
+                  {'Official page'}
+                </Typography>
               </Link>
             </Box>
           </Box>
