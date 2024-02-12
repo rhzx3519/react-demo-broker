@@ -19,14 +19,12 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
+              <Route path='/' element={<Home />} />
               <Route path="/signin" element={<SignInSide setUser={setUser}/>} />
               <Route path="/main" element={<Main user={user} setUser={setUser} />} />
-              {/*<Route path='/home' element={<Home />} />*/}
               <Route path='/blog' element={<Blog />} />
               <Route path='/facebook' element={<Facebook />} />
-              {/*<Route path='/' element={<Gallery user={user} setUser={setUser} />} />*/}
-              <Route path='/' element={<Home />} />
-              <Route path='/broker' element={<Broker />} />
+              <Route path='/brok' element={<Broker />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -24,7 +24,7 @@
   {
     "id": 3,
     "name": "Broker",
-    "redirect": "/broker",
+    "redirect": "/brok",
     "tours": [
       {
         "id": 1,

@@ -1,10 +1,10 @@
 import Sidebar from "./Sidebar";
 import Feed from "./Feed";
-import Rightbar from "./Rightbar";
 import Navbar from "./Navbar";
 import Add from "./Add";
 import { useState } from "react";
 import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
+import Rightbar from "./Rightbar";
 
 export default function Facebook() {
     const [mode, setMode] = useState("light");
