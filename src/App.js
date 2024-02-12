@@ -9,6 +9,7 @@ import Facebook from "./facebook/Facebook";
 import Gallery from "./gallery/Gallery";
 import Home from "./pages/Home";
 import SearchAppBar from "./components/AppBar";
+import Broker from "./broker/Broker";
 
 function App() {
     const [user, setUser] = useState(null)
@@ -25,6 +26,7 @@ function App() {
               <Route path='/facebook' element={<Facebook />} />
               {/*<Route path='/' element={<Gallery user={user} setUser={setUser} />} />*/}
               <Route path='/' element={<Home />} />
+              <Route path='/broker' element={<Broker />} />
           </Routes>
         </BrowserRouter>
       </div>
