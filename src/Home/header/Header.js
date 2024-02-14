@@ -33,7 +33,7 @@ const Header = (props) => {
            </div>
        </div>
        <div className="right">
-           {user && <a href="_blank">{user.nickname}</a>}
+           {user && <a href="_blank">{user?.nickname}</a>}
            {user && <label onClick={onButtonClick}>Logout</label>}
        </div>
    </div>

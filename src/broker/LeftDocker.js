@@ -40,7 +40,9 @@ const LeftInnerDivider = styled(Divider)(({theme}) => ({
     flexItem: true,
 }));
 
-export default function LeftDocker() {
+export default function LeftDocker(props) {
+    const { user, setUser } = props
+
     return <Box sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -62,7 +64,7 @@ export default function LeftDocker() {
                 component="section"
                 sx={{ flexGrow: 0, fontSize: '0.9rem', m: 1  }}
             >
-                Anonymous
+                {user?.nickname}
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-around', m: 1 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mr: 2 }}>

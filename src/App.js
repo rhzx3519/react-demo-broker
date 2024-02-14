@@ -3,7 +3,7 @@ import './App.css';
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Main from "./Home/Main";
-import SignInSide from "./SignInSide";
+import SignInSide from "./broker/SignInSide";
 import Blog from "./Blog/Blog";
 import Facebook from "./facebook/Facebook";
 import Gallery from "./gallery/Gallery";
@@ -14,7 +14,6 @@ import Broker from "./broker/Broker";
 function App() {
     const [user, setUser] = useState(null)
 
-
   return (
       <div className="App">
         <BrowserRouter>
@@ -24,7 +23,7 @@ function App() {
               <Route path="/main" element={<Main user={user} setUser={setUser} />} />
               <Route path='/blog' element={<Blog />} />
               <Route path='/facebook' element={<Facebook />} />
-              <Route path='/brok' element={<Broker />} />
+              <Route path='/brok' element={<Broker user={user} setUser={setUser}/>} />
           </Routes>
         </BrowserRouter>
       </div>

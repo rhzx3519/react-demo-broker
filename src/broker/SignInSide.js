@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { SignIn, Verify } from "./API/AuthAPI";
+import { SignIn, Verify } from "../API/AuthAPI";
 
 function Copyright(props) {
     return (
@@ -38,23 +38,6 @@ export default function SignInSide(props) {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        // Fetch the user email and token from local storage
-        const localUser = JSON.parse(localStorage.getItem("user"))
-        if (!localUser || !localUser.token) {
-            setUser(null)
-            return
-        }
-
-        (async function(){
-            const status= await Verify(localUser.token)
-            if (status === 200) {
-                setUser(localUser)
-                navigate('/')
-            }
-        })()
-
-    }, [])
 
 
     const handleSubmit = (event) => {
@@ -71,7 +54,7 @@ export default function SignInSide(props) {
             }
             localStorage.setItem("user", JSON.stringify(r.data))
             setUser(r.data)
-            navigate("/")
+            navigate("/brok")
         })()
 
     };

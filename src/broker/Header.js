@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useEffect } from "react"
 import { Box } from "@mui/system";
 import Toolbar from "@mui/material/Toolbar";
 import AppBar from "@mui/material/AppBar";
@@ -11,6 +11,10 @@ import PersonIcon from '@mui/icons-material/Person';
 import Divider from "@mui/material/Divider";
 import { InputBase, styled } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
+import { Verify } from "../API/AuthAPI";
 
 const Search = styled("div")(({ theme }) => ({
     backgroundColor: "white",
@@ -21,7 +25,27 @@ const Search = styled("div")(({ theme }) => ({
     alignItems: 'center',
 }));
 
-export default function Header() {
+export default function Header(props) {
+    const { user, setUser } = props
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        // Fetch the user email and token from local storage
+        const localUser = JSON.parse(localStorage.getItem("user"))
+        if (!localUser || !localUser.token) {
+            setUser(null)
+            return
+        }
+
+        (async function(){
+            const status= await Verify(localUser.token)
+            if (status === 200) {
+                setUser(localUser)
+                return
+            }
+        })()
+    }, [])
+
     return <Fragment>
         <AppBar position="sticky" sx={{  backgroundColor: '#3167b9' }}>
             <Toolbar sx={{
@@ -58,7 +82,7 @@ export default function Header() {
                         }} onClick={(e) => {console.log('click search')}} />
                     </Search>
                 </Box>
-                <Box sx={{
+                {user && <Box sx={{
                     display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
                     '& > *': {
                         margin: 3
@@ -74,9 +98,31 @@ export default function Header() {
                         sx={{ flexGrow: 0, fontSize: '0.9rem'  }}
                         display="inline"
                     >
-                        Anonymous
+                        {user?.nickname}
                     </Typography>
-                </Box>
+                </Box>}
+                {!user && <Box sx={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
+                    '& > *': {
+                        margin: 3
+                    }}}>
+                    <HeadsetMicIcon fontSize='medium'/>
+                    <Button
+                        component="label"
+                        role={undefined}
+                        color="inherit"
+                        tabIndex={-1}
+                        variant="outlined"
+                        startIcon={<PersonIcon />}
+                        sx={{
+                            borderRadius: 6,
+                            width: 150,
+                        }}
+                        onClick={(e) => navigate('/signin')}
+                    >
+                        Sign In/Up
+                    </Button>
+                </Box>}
             </Toolbar>
         </AppBar>
     </Fragment>

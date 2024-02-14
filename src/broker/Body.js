@@ -26,7 +26,9 @@ function AssetsTable() {
 
 }
 
-export default function Body() {
+export default function Body(props) {
+    const { user, setUser } = props
+
     return <Box sx={{
         display: 'flex',
         '& > *': {
@@ -34,7 +36,7 @@ export default function Body() {
         }
     }}>
         <Box sx={{ height: 610, mr: 1, mt: 2, border: 1, borderRadius: 1, borderColor: '#eee'  }}>
-            <LeftDocker />
+            <LeftDocker user={user} setUser={setUser} />
         </Box>
         <Box sx={{ flex: 5, height: 1500 }}>
             {/*<AssetsTable />*/}
