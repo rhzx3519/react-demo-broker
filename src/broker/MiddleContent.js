@@ -2,7 +2,8 @@ import React from "react";
 import { Box } from "@mui/system";
 import AssetsTable from "./AssetsTable";
 
-export default function MiddleContent() {
+export default function MiddleContent(props) {
+    const { user } = props
     return <Box sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -12,6 +13,6 @@ export default function MiddleContent() {
         mr: 3,
         ml: 3,
     }}>
-        <AssetsTable />
+        <AssetsTable user={user}/>
     </Box>
 }

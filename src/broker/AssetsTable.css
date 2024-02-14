@@ -1,0 +1,8 @@
+.pulse {
+    background-color: yellow;
+    -webkit-animation: blink 800ms infinite;
+    animation: blink 800ms infinite;
+}
+
+@-webkit-keyframes blink { 50% { background-color: red; }}
+@keyframes blink { 50% { background-color: red; }}

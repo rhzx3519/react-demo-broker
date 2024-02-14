@@ -40,7 +40,7 @@ export default function Body(props) {
         </Box>
         <Box sx={{ flex: 5, height: 1500 }}>
             {/*<AssetsTable />*/}
-            <MiddleContent />
+            <MiddleContent user={user}/>
         </Box>
         <Box sx={{ height: 500, backgroundColor: '#eee', ml: 1, mt: 2 }}></Box>
     </Box>
