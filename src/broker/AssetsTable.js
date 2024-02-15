@@ -53,10 +53,10 @@ export default function AssetsTable(props) {
     const prevRowsRef = useRef(initialRows);
 
     useEffect(() => {
-        rows.map(r => {
+        rows.forEach(r => {
             let prevRow
-            prevRowsRef.current.map(tmp => {
-                if (tmp.symbol == r.symbol) {
+            prevRowsRef.current.forEach(tmp => {
+                if (tmp.symbol === r.symbol) {
                     prevRow = tmp
                     return
                 }
@@ -79,12 +79,15 @@ export default function AssetsTable(props) {
             let symbols = []
             rows.map(r => symbols.push(r.symbol))
             const r = await GetQuote(symbols.join(','), 'US')
-            let newRows = []
-            r.data.items.map(item => {
-                const q = item.quote
-                newRows.push({symbol: q.symbol, current: q.current, amplitude: q.amplitude, volume: q.volume, low: q.low, high: q.high})
-            })
-            setRows(newRows)
+            if (r) {
+                let newRows = []
+                r.data.items.forEach(item => {
+                    const q = item.quote
+                    newRows.push({symbol: q.symbol, current: q.current, amplitude: q.amplitude, volume: q.volume, low: q.low, high: q.high})
+                    return
+                })
+                setRows(newRows)
+            }
         }, 5000);
 
         return () => {
