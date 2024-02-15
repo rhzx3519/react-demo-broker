@@ -10,6 +10,7 @@ import Gallery from "./gallery/Gallery";
 import Home from "./pages/Home";
 import SearchAppBar from "./components/AppBar";
 import Broker from "./broker/Broker";
+import Chatroom from "./chat/Chatroom";
 
 function App() {
     const [user, setUser] = useState(null)
@@ -24,6 +25,7 @@ function App() {
               <Route path='/blog' element={<Blog />} />
               <Route path='/facebook' element={<Facebook />} />
               <Route path='/brok' element={<Broker user={user} setUser={setUser}/>} />
+              <Route path='/chatroom' element={<Chatroom user={user} setUser={setUser}/>} />
           </Routes>
         </BrowserRouter>
       </div>
