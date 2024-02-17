@@ -8,7 +8,6 @@ import Blog from "./Blog/Blog";
 import Facebook from "./facebook/Facebook";
 import Gallery from "./gallery/Gallery";
 import Home from "./pages/Home";
-import SearchAppBar from "./components/AppBar";
 import Broker from "./broker/Broker";
 import Chatroom from "./chat/Chatroom";
 
@@ -19,7 +18,7 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-              <Route path='/' element={<Home />} />
+              <Route path='/' element={<Home user={user} setUser={setUser} />} />
               <Route path="/signin" element={<SignInSide setUser={setUser}/>} />
               <Route path="/main" element={<Main user={user} setUser={setUser} />} />
               <Route path='/blog' element={<Blog />} />

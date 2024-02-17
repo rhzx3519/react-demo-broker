@@ -4,12 +4,14 @@ import cities from "../data/data.json";
 import Card from "../components/Card";
 import SearchAppBar from "../components/AppBar";
 import Link from "@mui/material/Link";
+import Header from "../broker/Header";
 
-export default function Home() {
+export default function Home(props) {
+    const { user, setUser } = props
   return (
       <>
-      <SearchAppBar />
-      <Container maxWidth='lg'>
+          <Header user={user} setUser={setUser} />
+          <Container maxWidth='lg'>
         {cities.map((city) => (
           <>
               <Link href={city.redirect} underline="none">
