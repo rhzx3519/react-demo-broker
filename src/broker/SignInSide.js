@@ -54,7 +54,7 @@ export default function SignInSide(props) {
             }
             localStorage.setItem("user", JSON.stringify(r.data))
             setUser(r.data)
-            navigate("/brok")
+            navigate("/")
         })()
 
     };
