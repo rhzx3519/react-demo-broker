@@ -8,7 +8,7 @@ import Blog from "./examples/Blog/Blog";
 import Facebook from "./examples/facebook/Facebook";
 import Home from "./home/Home";
 import Broker from "./broker/Broker";
-import Chatroom from "./chat/Chatroom";
+import Discord from "./discord/Discord";
 
 function App() {
     const [user, setUser] = useState(null)
@@ -23,7 +23,7 @@ function App() {
               <Route path='/blog' element={<Blog />} />
               <Route path='/facebook' element={<Facebook />} />
               <Route path='/brok' element={<Broker user={user} setUser={setUser}/>} />
-              <Route path='/chatroom' element={<Chatroom user={user} setUser={setUser}/>} />
+              <Route path='/chatroom' element={<Discord user={user} setUser={setUser}/>} />
           </Routes>
         </BrowserRouter>
       </div>
