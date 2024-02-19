@@ -2,12 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import Main from "./Home/Main";
+import Main from "./deprecated/brokerdraft/Main";
 import SignInSide from "./broker/SignInSide";
-import Blog from "./Blog/Blog";
-import Facebook from "./facebook/Facebook";
-import Gallery from "./gallery/Gallery";
-import Home from "./pages/Home";
+import Blog from "./examples/Blog/Blog";
+import Facebook from "./examples/facebook/Facebook";
+import Home from "./home/Home";
 import Broker from "./broker/Broker";
 import Chatroom from "./chat/Chatroom";
 

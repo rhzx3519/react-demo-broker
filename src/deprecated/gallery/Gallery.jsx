@@ -9,7 +9,7 @@ import SwipeableViews from 'react-swipeable-views';
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-import { Verify } from "../API/AuthAPI";
+import { Verify } from "../../API/AuthAPI";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

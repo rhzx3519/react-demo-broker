@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './Main.css';
 import Header from "./header/Header";
-import { Verify } from "../API/AuthAPI";
+import { Verify } from "../../API/AuthAPI";
 
 const Main = (props) => {
     const { user, setUser } = props

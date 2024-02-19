@@ -1,7 +1,7 @@
 import React from "react";
 import './Header.css'
-import gLogo from '../../Assets/Images/g_logo.png'
-import searchIcon from '../../Assets/Images/free-search-icon-2903-thumb.png'
+import gLogo from '../../../Assets/Images/g_logo.png'
+import searchIcon from '../../../Assets/Images/free-search-icon-2903-thumb.png'
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
