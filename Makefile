@@ -9,3 +9,6 @@ build:
 
 push:
 	docker push rhzx3519/react-demo-broker
+
+fake:
+	npx json-server fakedata/db.json -p 3001
