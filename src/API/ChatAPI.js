@@ -1,9 +1,9 @@
-export async function GetQuote(symbols, exchange) {
+export async function findServers() {
     const localUser = JSON.parse(localStorage.getItem("user"))
     const token = localUser?.token
 
     try {
-        const uri = `${process.env.REACT_APP_CHAT_SERVER_BASE_URL}/v1/chat/servers`
+        const uri = `${process.env.REACT_APP_CHAT_SERVER_BASE_URL}/servers`
         const response = await fetch(uri, {
             method: "GET",
             headers: {

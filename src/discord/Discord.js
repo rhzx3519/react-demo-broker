@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Server from "./Server";
 import Chatroom from "./Chatroom";
 import Group from "./Group";
+import "./Discord.css";
 
 export default function Discord(props) {
     const { user, setUser } = props
