@@ -16,7 +16,7 @@ export default function Server(props) {
         setServers(serverList || [])
     }
     useEffect(() => {
-        callAPI()
+        // callAPI()
     }, [])
 
     return <Box sx={{ backgroundColor: 'blue', height: '100vh' }}>

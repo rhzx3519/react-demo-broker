@@ -15,7 +15,7 @@ export default function Discord(props) {
                 "& > *" : {
                     flex: 1,
                     flexGrow: 1,
-                    m: 0.5,
+                    mx: 0.5,
                 }
             }}>
                 <Box sx={{ flex: 1 }}>
