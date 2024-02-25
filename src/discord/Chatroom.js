@@ -187,7 +187,7 @@ export default function Chatroom() {
 
     const localUser = JSON.parse(localStorage.getItem("user"))
     const token = localUser?.token
-    const WS_URL = `${process.env.REACT_APP_CHAT_WEBSOCKET_URL}/v1/ws/chat`
+    const WS_URL = `wss://${window.location.hostname}${process.env.REACT_APP_CHAT_WEBSOCKET_PATH}/v1/ws/chat`
     const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
         WS_URL,
         {
