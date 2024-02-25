@@ -12,6 +12,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SearchIcon from "@mui/icons-material/Search";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import SendIcon from '@mui/icons-material/Send';
+import useWebSocket, { ReadyState } from "react-use-websocket"
+
 
 const TopBar = function () {
     const theme = useTheme();
@@ -38,6 +40,35 @@ const TopBar = function () {
    </AppBar>
 }
 
+function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+
+    for (i = 0; i < 3; i += 1) {
+        const value = (hash >> (i * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+}
+
+function stringAvatar(name) {
+    return {
+        sx: {
+            bgcolor: stringToColor(name),
+        },
+        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+}
+
 const Record = function (props) {
     const { src, log, timestamp } = props
     return <Box sx={{
@@ -48,10 +79,7 @@ const Record = function (props) {
         justifyContent: 'flex-start',
         alignItems: 'center',
     }}>
-        <Avatar
-            sx={{ width: 40, height: 40 }}
-            src={src}
-        />
+        <Avatar {...stringAvatar('Kent Dodds')}/>
         <Box>
             <Typography
                 variant='subtitle2'
@@ -66,6 +94,7 @@ const Record = function (props) {
                 sx={{ ml: 2 }}
                 color='white'
             >
+                {log}
             </Typography>
         </Box>
     </Box>
@@ -154,6 +183,38 @@ export default function Chatroom() {
             scrollRef.current.scrollIntoView({ behaviour: "smooth" });
         }
     }, [chats]);
+
+
+    const localUser = JSON.parse(localStorage.getItem("user"))
+    const token = localUser?.token
+    const WS_URL = `${process.env.REACT_APP_CHAT_WEBSOCKET_URL}/v1/ws/chat`
+    const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
+        WS_URL,
+        {
+            share: false,
+            shouldReconnect: () => true,
+        },
+    )
+
+
+    // Run when the connection state (readyState) changes
+    useEffect(() => {
+        console.log("Connection state changed")
+        if (readyState === ReadyState.OPEN) {
+            sendJsonMessage({
+                event: "subscribe",
+                data: {
+                    channel: "general-chatroom",
+                },
+            })
+        }
+    }, [readyState])
+
+    // Run when a new WebSocket message is received (lastJsonMessage)
+    useEffect(() => {
+        console.log(`Got a new message: ${lastJsonMessage}`)
+    }, [lastJsonMessage])
+
 
     return <Box sx={{ backgroundColor: 'green', height: '100vh', padding: 1,
         "& > *" : {}
