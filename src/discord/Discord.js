@@ -5,17 +5,30 @@ import Server from "./Server";
 import Chatroom from "./Chatroom";
 import Group from "./Group";
 import "./Discord.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const darkTheme = createTheme({
+    palette: {
+        primary: {
+            main: '#25262b',
+        },
+        secondary: {
+            main: '#edf2ff',
+        },
+    },
+});
 
 export default function Discord(props) {
     const { user, setUser } = props
     return (
-        <Container maxWidth='lg' sx={{ height: '100vh', backgroundColor: 'yellow' }}>
+        <ThemeProvider theme={darkTheme}>
+        <Container maxWidth='lg' sx={{ height: '100vh' }}>
             <Box sx={{
                 display: 'flex',
                 "& > *" : {
                     flex: 1,
                     flexGrow: 1,
-                    mx: 0.5,
+                    mx: 0.05,
                 }
             }}>
                 <Box sx={{ flex: 1 }}>
@@ -25,9 +38,10 @@ export default function Discord(props) {
                     <Group />
                 </Box>
                 <Box sx={{ flex: 10 }}>
-                    <Chatroom />
+                    <Chatroom user={user} />
                 </Box>
             </Box>
         </Container>
+        </ThemeProvider>
     )
 };

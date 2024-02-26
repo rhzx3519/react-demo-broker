@@ -70,15 +70,18 @@ function stringAvatar(name) {
 }
 
 const Record = function (props) {
-    const { msg } = props
-    return <Box sx={{
+    const { msg, user } = props
+
+    const StyledBox = styled(Box)(({ }) => ({
         p: 1,
         borderRadius: 4,
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: msg.from?.email === user.email ? 'row-reverse' : 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-    }}>
+    }));
+
+    return <StyledBox>
         <Avatar {...stringAvatar(`${msg.from.fullname}`)}/>
         <Box>
             <Typography
@@ -86,7 +89,7 @@ const Record = function (props) {
                 color='white'
                 sx={{ ml: 2 }}
             >
-                {new Date(msg.created_at*1000).toLocaleDateString()}
+                {new Date(msg.created_at*1000).toLocaleString()}
             </Typography>
             <Typography
                 variant='body1'
@@ -97,16 +100,16 @@ const Record = function (props) {
                 {msg.content}
             </Typography>
         </Box>
-    </Box>
+    </StyledBox>
 }
 
 const MessageArea = function (props) {
-    const { messageHistory, scrollRef } = props
+    const { messageHistory, scrollRef, user } = props
 
     return   <Box sx={{ width: '100%', height: '87%', backgroundColor: '#25262b', my: 0.5 }}>
         <Stack spacing={2} style={{maxHeight: "100%", overflow: 'auto'}}>
             {messageHistory.map(msg => (
-                <Record msg={msg}/>
+                <Record msg={msg} user={user}/>
             ))}
             <Box ref={scrollRef} />
         </Stack>
@@ -136,12 +139,8 @@ const InputArea = function (props) {
         }
         inputEle.value = ''
 
-        setChats([
-            ...messageHistory,
-            msg,
-        ])
+        sendJsonMessage(msg)
     }
-
 
     return <Box sx={{
         backgroundColor: "white",
@@ -151,7 +150,7 @@ const InputArea = function (props) {
         justifyContent: 'center',
         alignItems: 'center',
         height: '5.5%',
-        m: 2,
+        m: 1,
     }}>
             <AddCircleOutlineIcon style={{ cursor: 'pointer' }} fontSize='medium' sx={{
                 color: 'black',
@@ -167,7 +166,8 @@ const InputArea = function (props) {
 
 
 
-export default function Chatroom() {
+export default function Chatroom(props) {
+    const { user } = props
     const [messageHistory, setMessageHistory] = useState([]);
     const scrollRef = useRef(null);
 
@@ -213,11 +213,11 @@ export default function Chatroom() {
     }, [lastJsonMessage])
 
 
-    return <Box sx={{ backgroundColor: 'green', height: '100vh', padding: 1,
+    return <Box sx={{ backgroundColor: '#25262b', height: '100vh', padding: 1,
         "& > *" : {}
     }}>
         <TopBar />
-        <MessageArea messageHistory={messageHistory} scrollRef={scrollRef} />
+        <MessageArea messageHistory={messageHistory} scrollRef={scrollRef} user={user}/>
         <InputArea messageHistory={messageHistory} setChats={setMessageHistory} sendJsonMessage={sendJsonMessage} />
     </Box>
 };

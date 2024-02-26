@@ -9,9 +9,28 @@ import Facebook from "./examples/facebook/Facebook";
 import Home from "./home/Home";
 import Broker from "./broker/Broker";
 import Discord from "./discord/Discord";
+import { Verify } from "./API/AuthAPI";
 
 function App() {
     const [user, setUser] = useState(null)
+
+    useEffect(() => {
+        // Fetch the user email and token from local storage
+        const localUser = JSON.parse(localStorage.getItem("user"))
+        if (!localUser || !localUser.token) {
+            setUser(null)
+            return
+        }
+
+        (async function(){
+            const status= await Verify(localUser.token)
+            if (status === 200) {
+                setUser(localUser)
+                return
+            }
+        })()
+
+    }, [])
 
   return (
       <div className="App">

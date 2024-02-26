@@ -19,7 +19,7 @@ export default function Server(props) {
         // callAPI()
     }, [])
 
-    return <Box sx={{ backgroundColor: 'blue', height: '100vh' }}>
+    return <Box sx={{ backgroundColor: 'primary.main', height: '100vh' }}>
         <Stack direction="column" spacing={2}>
             {servers.map(s =>
                 <ServerBtn>s.name</ServerBtn>
