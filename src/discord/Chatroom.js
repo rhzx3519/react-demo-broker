@@ -70,7 +70,7 @@ function stringAvatar(name) {
 }
 
 const Record = function (props) {
-    const { src, log, timestamp } = props
+    const { msg } = props
     return <Box sx={{
         p: 1,
         borderRadius: 4,
@@ -79,14 +79,14 @@ const Record = function (props) {
         justifyContent: 'flex-start',
         alignItems: 'center',
     }}>
-        <Avatar {...stringAvatar('Kent Dodds')}/>
+        <Avatar {...stringAvatar(`${msg.from.fullname}`)}/>
         <Box>
             <Typography
                 variant='subtitle2'
                 color='white'
                 sx={{ ml: 2 }}
             >
-                {new Date(timestamp).toLocaleDateString()}
+                {new Date(msg.created_at*1000).toLocaleDateString()}
             </Typography>
             <Typography
                 variant='body1'
@@ -94,23 +94,19 @@ const Record = function (props) {
                 sx={{ ml: 2 }}
                 color='white'
             >
-                {log}
+                {msg.content}
             </Typography>
         </Box>
     </Box>
 }
 
 const MessageArea = function (props) {
-    const { chats, scrollRef } = props
+    const { messageHistory, scrollRef } = props
 
     return   <Box sx={{ width: '100%', height: '87%', backgroundColor: '#25262b', my: 0.5 }}>
         <Stack spacing={2} style={{maxHeight: "100%", overflow: 'auto'}}>
-            {chats.map(log => (
-                <Record
-                    log={log}
-                    src={'https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'}
-                    timestamp={Date.now()}
-                />
+            {messageHistory.map(msg => (
+                <Record msg={msg}/>
             ))}
             <Box ref={scrollRef} />
         </Stack>
@@ -118,7 +114,7 @@ const MessageArea = function (props) {
 }
 
 const InputArea = function (props) {
-    const { chats, setChats } = props
+    const { messageHistory, setChats, sendJsonMessage } = props
 
     const handleInput = (e) => {
         if (e.key === 'Enter') {
@@ -128,10 +124,7 @@ const InputArea = function (props) {
             }
             e.target.value = ''
 
-            setChats([
-                ...chats,
-                msg,
-            ])
+            sendJsonMessage(msg)
         }
     }
 
@@ -144,7 +137,7 @@ const InputArea = function (props) {
         inputEle.value = ''
 
         setChats([
-            ...chats,
+            ...messageHistory,
             msg,
         ])
     }
@@ -175,14 +168,14 @@ const InputArea = function (props) {
 
 
 export default function Chatroom() {
-    const [chats, setChats] = useState([]);
+    const [messageHistory, setMessageHistory] = useState([]);
     const scrollRef = useRef(null);
 
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollIntoView({ behaviour: "smooth" });
         }
-    }, [chats]);
+    }, [messageHistory]);
 
 
     const localUser = JSON.parse(localStorage.getItem("user"))
@@ -201,18 +194,22 @@ export default function Chatroom() {
     useEffect(() => {
         console.log("Connection state changed")
         if (readyState === ReadyState.OPEN) {
-            sendJsonMessage({
-                event: "subscribe",
-                data: {
-                    channel: "general-chatroom",
-                },
-            })
+            // sendJsonMessage()
         }
     }, [readyState])
 
     // Run when a new WebSocket message is received (lastJsonMessage)
     useEffect(() => {
-        console.log(`Got a new message: ${lastJsonMessage}`)
+        console.log(`Got a new message: ${JSON.stringify(lastJsonMessage)}`)
+        if (lastJsonMessage == null || lastJsonMessage == "") {
+            return
+        }
+        if (lastJsonMessage?.msg_code == 1) {
+            setMessageHistory([
+                ...messageHistory,
+                lastJsonMessage,
+            ])
+        }
     }, [lastJsonMessage])
 
 
@@ -220,7 +217,7 @@ export default function Chatroom() {
         "& > *" : {}
     }}>
         <TopBar />
-        <MessageArea chats={chats} scrollRef={scrollRef} />
-        <InputArea chats={chats} setChats={setChats} />
+        <MessageArea messageHistory={messageHistory} scrollRef={scrollRef} />
+        <InputArea messageHistory={messageHistory} setChats={setMessageHistory} sendJsonMessage={sendJsonMessage} />
     </Box>
 };
