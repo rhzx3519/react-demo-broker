@@ -4,7 +4,6 @@ import Container from "@mui/material/Container";
 import Server from "./Server";
 import Chatroom from "./Chatroom";
 import Group from "./Group";
-import "./Discord.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const darkTheme = createTheme({

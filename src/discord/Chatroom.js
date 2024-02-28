@@ -2,15 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, useTheme } from "@mui/system";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
 import { Avatar, InputAdornment, InputBase } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import SearchIcon from "@mui/icons-material/Search";
-import { convertLength } from "@mui/material/styles/cssUtils";
 import SendIcon from '@mui/icons-material/Send';
 import useWebSocket, { ReadyState } from "react-use-websocket"
 
@@ -106,6 +102,7 @@ const Record = function (props) {
 const MessageArea = function (props) {
     const { messageHistory, scrollRef, user } = props
 
+
     return   <Box sx={{ width: '100%', height: '87%', backgroundColor: '#25262b', my: 0.5 }}>
         <Stack spacing={2} style={{maxHeight: "100%", overflow: 'auto'}}>
             {messageHistory.map(msg => (
@@ -200,12 +197,11 @@ export default function Chatroom(props) {
 
     // Run when a new WebSocket message is received (lastJsonMessage)
     useEffect(() => {
-        console.log(`Got a new message: ${JSON.stringify(lastJsonMessage)}`)
         if (lastJsonMessage == null || lastJsonMessage == "") {
             return
         }
         if (lastJsonMessage?.msg_code == 1) {
-            setMessageHistory([
+            setMessageHistory(messageHistory => [
                 ...messageHistory,
                 lastJsonMessage,
             ])
