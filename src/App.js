@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import Home from "./home/Home";
 import Broker from "./broker/Broker";
 import Discord from "./discord/Discord";
 import { Verify } from "./API/AuthAPI";
+import Dashboard from "./dashboard/Dashboard";
 
 function App() {
     const [user, setUser] = useState(null)
@@ -43,6 +43,7 @@ function App() {
               <Route path='/facebook' element={<Facebook />} />
               <Route path='/brok' element={<Broker user={user} setUser={setUser}/>} />
               <Route path='/chatroom' element={<Discord user={user} setUser={setUser}/>} />
+              <Route path='/dashboard' element={<Dashboard />} />
           </Routes>
         </BrowserRouter>
       </div>

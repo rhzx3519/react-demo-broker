@@ -1,0 +1,19 @@
+.Weather {
+  font-family: "Work Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  color: #dbe7fc;
+  border-radius: 20px;
+  background-image: linear-gradient(
+    to bottom,
+    #1336a6,
+    #284cb8,
+    #3a61ca,
+    #4c77db,
+    #5f8deb
+  );
+}
+
